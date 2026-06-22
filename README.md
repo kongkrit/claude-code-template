@@ -7,6 +7,8 @@ A starter repository preconfigured for working with [Claude Code](https://claude
 | File | Purpose |
 |------|---------|
 | `.claude/settings.json` | Claude Code settings — `model: opus`, `effortLevel: xhigh`. |
+| `.claude/settings.json` (hook) | `SessionStart` hook that prints `PROGRESS.md` into context at startup. |
+| `.claude/commands/wrapup.md` | `/wrapup` — write a session handoff to `PROGRESS.md`, then commit. |
 | `.gitignore` | Ignores OS cruft, Python/Node build artifacts, and editor files. |
 | `.gitattributes` | Normalizes line endings to LF and marks binary file types. |
 | `LICENSE` | Project license. |
