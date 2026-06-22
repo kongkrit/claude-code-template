@@ -20,6 +20,18 @@ This is a **Claude Code template repository** — a starting point for new proje
 - When adding a new language or toolchain, extend `.gitignore` and `.gitattributes` rather than creating parallel ignore files.
 - Respect the project [LICENSE](LICENSE) when adding dependencies.
 
+## Development environment
+
+- Target OS is **Debian 13 (trixie)**; `docker` is already installed. Base tooling is installed via `apt` — `git`, `gh`, `python3`, `python3-venv`, `python3-pip`, `python3-dev`, `build-essential`, `curl` (see the [README](README.md#development-setup-debian) for the full command).
+- **Debian 13 is externally managed (PEP 668): never run a system-wide `pip install`.** Create and use a per-project virtual environment instead:
+
+  ```bash
+  python3 -m venv .venv
+  source .venv/bin/activate
+  pip install -r requirements.txt   # or: pip install -e ".[dev]"
+  ```
+- `node`/`npm` and the .NET SDK are not used; serve static content with `python3 -m http.server`. Multi-arch Docker builds need a one-time QEMU + buildx setup (see README).
+
 ## Notes
 
 - As the template grows into a real project, update this file with build, test, and run commands so they are discoverable.

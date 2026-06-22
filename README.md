@@ -19,6 +19,55 @@ A starter repository preconfigured for working with [Claude Code](https://claude
 
 Personal settings that should not be committed belong in `.claude/settings.local.json`, which is already gitignored.
 
+## Development setup (Debian)
+
+Targets **Debian 13 (trixie)**. `docker` is assumed already installed.
+
+Install the base toolchain:
+
+```bash
+sudo apt install -y git gh python3 python3-venv python3-pip python3-dev build-essential curl
+```
+
+| Package | Purpose |
+|---|---|
+| `git` | Version control. |
+| `gh` | GitHub CLI — clone, push, PRs, releases. |
+| `python3` | Interpreter. |
+| `python3-venv` | Virtual environments — required on Debian 13 (see below). |
+| `python3-pip` | Installs Python dependencies (most ship as prebuilt wheels). |
+| `python3-dev` | C headers for dependencies built from source. |
+| `build-essential` | C/C++ compiler + make, for the same source builds. |
+| `curl` | Fetching files and data over HTTP. |
+
+### Python: Debian 13 is externally managed (PEP 668)
+
+A system-wide `pip install` is blocked. Use a virtual environment per project:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt      # or: pip install -e ".[dev]"
+```
+
+Optional: `sudo apt install -y pipx`, then `pipx install .` to install a packaged CLI tool without managing a venv by hand.
+
+### Docker multi-arch builds (one-time, optional)
+
+Building multi-arch images (`linux/amd64` + `linux/arm64`) needs QEMU emulation plus a `docker-container` buildx builder:
+
+```bash
+docker run --privileged --rm tonistiigi/binfmt --install all
+docker buildx create --name multiarch --driver docker-container --bootstrap --use
+```
+
+The first line registers QEMU so the host can emulate the non-native architecture (`--install all` is host-agnostic); the second creates and activates the builder reused by later `docker buildx build`. On Apple Silicon + OrbStack, cross-arch emulation is built in, so only the `buildx create` line is needed.
+
+### Not required
+
+- **node / npm** — not used; serve static content with `python3 -m http.server`.
+- **.NET SDK** — no .NET projects.
+
 ## License
 
 See [LICENSE](LICENSE).
