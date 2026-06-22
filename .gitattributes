@@ -38,3 +38,4 @@
 *.doc       binary
 *.zip       binary
 *.tar.gz    binary
+*.mhtml     binary
