@@ -9,6 +9,8 @@ This is a **Claude Code template repository** — a starting point for new proje
 ## Repository layout
 
 - `.claude/settings.json` — Claude Code settings committed for the project (`model: opus`, `effortLevel: xhigh`). Personal overrides go in `.claude/settings.local.json` (gitignored), never in the committed file.
+- `.claude/commands/wrapup.md` — the `/wrapup` slash command: writes a session handoff to `PROGRESS.md`, then stages and commits.
+- `PROGRESS.md` — session handoff created/updated by `/wrapup`; printed into context at session start by the `SessionStart` hook in `.claude/settings.json`. Absent until the first `/wrapup`.
 - `.gitignore` — ignores OS cruft, Python/Node build artifacts, and editor files.
 - `.gitattributes` — enforces LF line endings and marks binary file types. Keep new text/binary file types consistent with the existing entries.
 - `LICENSE` — the project license.
