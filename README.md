@@ -28,7 +28,7 @@ Targets **Debian 13 (trixie)**. `docker` is assumed already installed.
 Install the base toolchain:
 
 ```bash
-sudo apt install -y git gh python3 python3-venv python3-pip python3-dev build-essential curl
+sudo apt install -y git gh python3 python3-venv python3-pip python3-dev build-essential curl jq
 ```
 
 | Package | Purpose |
@@ -41,6 +41,18 @@ sudo apt install -y git gh python3 python3-venv python3-pip python3-dev build-es
 | `python3-dev` | C headers for dependencies built from source. |
 | `build-essential` | C/C++ compiler + make, for the same source builds. |
 | `curl` | Fetching files and data over HTTP. |
+| `jq` | Command-line JSON processor — query and transform JSON output. |
+
+### Installing more tools
+
+This environment has passwordless `sudo`, and Claude Code is allowed to install extra system tooling when a task needs it:
+
+```bash
+sudo apt update                 # refresh the package index if a package isn't found
+sudo apt install -y <package>   # e.g. ripgrep, sqlite3, imagemagick
+```
+
+Use `apt` for system-level tools and CLIs. Keep Python dependencies in the project virtual environment (below) rather than installing them as system packages. If a newly installed tool becomes a lasting dependency, add it to the base toolchain list above so it's reproducible.
 
 ### Python: Debian 13 is externally managed (PEP 668)
 

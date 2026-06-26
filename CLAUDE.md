@@ -24,7 +24,8 @@ This is a **Claude Code template repository** — a starting point for new proje
 
 ## Development environment
 
-- Target OS is **Debian 13 (trixie)**; `docker` is already installed. Base tooling is installed via `apt` — `git`, `gh`, `python3`, `python3-venv`, `python3-pip`, `python3-dev`, `build-essential`, `curl` (see the [README](README.md#development-setup-debian) for the full command).
+- Target OS is **Debian 13 (trixie)**; `docker` is already installed. Base tooling is installed via `apt` — `git`, `gh`, `python3`, `python3-venv`, `python3-pip`, `python3-dev`, `build-essential`, `curl`, `jq` (see the [README](README.md#development-setup-debian) for the full command).
+- **You may install additional system tools yourself.** If a task needs a CLI or library that isn't present, run `sudo apt install -y <package>` (update the index first with `sudo apt update` if a package isn't found). Prefer `apt` for system-level tooling; keep Python dependencies in the project venv (below), not in system packages. After installing something the project will keep relying on, record it in the [README](README.md#development-setup-debian) so the dependency is discoverable.
 - **Debian 13 is externally managed (PEP 668): never run a system-wide `pip install`.** Create and use a per-project virtual environment instead:
 
   ```bash
