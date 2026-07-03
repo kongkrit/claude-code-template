@@ -12,7 +12,15 @@
   "permissions": {
     "allow": [
       "Bash(sudo apt install:*)",
-      "Bash(sudo apt update:*)"
+      "Bash(sudo apt update:*)",
+      "Bash(python3:*)",
+      "Bash(.venv/bin/python3:*)",
+      "Bash(.venv/bin/pytest:*)",
+      "Bash(echo:*)",
+      "Bash(ls:*)",
+      "Bash(jq:*)",
+      "Skill(wrapup)",
+      "Skill(wrapup:*)"
     ]
   },
   "model": "opus",
