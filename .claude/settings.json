@@ -22,7 +22,11 @@
       "Bash(curl:*)",
       "Skill(wrapup)",
       "Skill(wrapup:*)"
-    ]
+    ],
+    "additionalDirectories": ["/tmp"]
+  },
+  "env": {
+    "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "1"
   },
   "model": "opus",
   "effortLevel": "xhigh"
