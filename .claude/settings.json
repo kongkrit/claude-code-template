@@ -16,6 +16,7 @@
       "Bash(python3:*)",
       "Bash(.venv/bin/python3:*)",
       "Bash(.venv/bin/pytest:*)",
+      "Bash(uv:*)",
       "Bash(echo:*)",
       "Bash(ls:*)",
       "Bash(jq:*)",

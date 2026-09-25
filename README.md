@@ -1,86 +1,70 @@
 # Claude Code Template
 
-A starter repository preconfigured for working with [Claude Code](https://claude.com/claude-code). Use it as a base for new projects so the Claude Code setup, ignore rules, and line-ending normalization are in place from the first commit.
+A starter repository preconfigured for [Claude Code](https://claude.com/claude-code): settings, a session-handoff workflow, ignore rules, and LF line endings from the first commit.
 
 ## What's included
 
 | File | Purpose |
 |------|---------|
-| `.claude/settings.json` | Claude Code settings — `model: opus`, `effortLevel: xhigh`. |
-| `.claude/settings.json` (hook) | `SessionStart` hook that prints `PROGRESS.md` into context at startup. |
-| `.claude/commands/wrapup.md` | `/wrapup` — write a session handoff to `PROGRESS.md`, then commit. |
-| `.gitignore` | Ignores OS cruft, Python/Node build artifacts, and editor files. |
-| `.gitattributes` | Normalizes line endings to LF and marks binary file types. |
+| `.claude/settings.json` | Claude Code settings (`model: opus`, `effortLevel: xhigh`), a permission allowlist, and a `SessionStart` hook that prints `PROGRESS.md` into context. |
+| `.claude/commands/wrapup.md` | `/wrapup` — writes a session handoff to `PROGRESS.md`, then commits. |
+| `PROGRESS.md` | Session handoff maintained by `/wrapup`. |
+| `.gitignore` | OS cruft, Python/Node build artifacts, editor files. |
+| `.gitattributes` | LF line endings; binary file types. |
 | `LICENSE` | Project license. |
 
 ## Usage
 
-1. Use this repo as a GitHub template (**Use this template**) or clone it.
-2. Remove these template files you don't need and start building your project.
-3. Adjust `.claude/settings.json` to taste — see the Claude Code [settings docs](https://docs.claude.com/en/docs/claude-code/settings).
+1. Click **Use this template** on GitHub, or clone the repo.
+2. Delete what you don't need and start building.
+3. Adjust `.claude/settings.json` to taste ([settings docs](https://docs.claude.com/en/docs/claude-code/settings)). Personal overrides go in `.claude/settings.local.json`, which is gitignored.
 
-Personal settings that should not be committed belong in `.claude/settings.local.json`, which is already gitignored.
+## Development setup (Debian 13)
 
-## Development setup (Debian)
-
-Targets **Debian 13 (trixie)**. `docker` is assumed already installed.
-
-Install the base toolchain:
+`docker` is assumed installed. Base toolchain:
 
 ```bash
 sudo apt install -y git gh python3 python3-venv python3-pip python3-dev build-essential curl jq
 ```
 
-| Package | Purpose |
-|---|---|
-| `git` | Version control. |
-| `gh` | GitHub CLI — clone, push, PRs, releases. |
-| `python3` | Interpreter. |
-| `python3-venv` | Virtual environments — required on Debian 13 (see below). |
-| `python3-pip` | Installs Python dependencies (most ship as prebuilt wheels). |
-| `python3-dev` | C headers for dependencies built from source. |
-| `build-essential` | C/C++ compiler + make, for the same source builds. |
-| `curl` | Fetching files and data over HTTP. |
-| `jq` | Command-line JSON processor — query and transform JSON output. |
+`python3-dev` and `build-essential` are only needed for Python packages built from source.
 
-### Installing more tools
-
-This environment has passwordless `sudo`, and Claude Code is allowed to install extra system tooling when a task needs it:
+`uv` is not packaged for Debian; install it with the standalone installer (needs `curl` from above). It puts `uv` and `uvx` in `~/.local/bin`, which Debian's default `~/.profile` adds to `PATH` on next login:
 
 ```bash
-sudo apt update                 # refresh the package index if a package isn't found
-sudo apt install -y <package>   # e.g. ripgrep, sqlite3, imagemagick
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Use `apt` for system-level tools and CLIs. Keep Python dependencies in the project virtual environment (below) rather than installing them as system packages. If a newly installed tool becomes a lasting dependency, add it to the base toolchain list above so it's reproducible.
+Verify: `git --version && gh --version && curl --version && uv --version`.
 
-### Python: Debian 13 is externally managed (PEP 668)
-
-A system-wide `pip install` is blocked. Use a virtual environment per project:
+**More tools.** `sudo` is passwordless, and Claude Code may install whatever a task needs:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt      # or: pip install -e ".[dev]"
+sudo apt update && sudo apt install -y <package>
 ```
 
-Optional: `sudo apt install -y pipx`, then `pipx install .` to install a packaged CLI tool without managing a venv by hand.
+Use `apt` for system tools; keep Python packages in the project venv. Add any lasting dependency to the command above.
 
-### Docker multi-arch builds (one-time, optional)
+**Python.** Debian 13 blocks system-wide `pip install` (PEP 668). Use a venv per project, with `uv` or the standard library:
 
-Building multi-arch images (`linux/amd64` + `linux/arm64`) needs QEMU emulation plus a `docker-container` buildx builder:
+```bash
+uv venv && uv pip install -r requirements.txt    # or: uv sync, if the project has a pyproject.toml
+# or
+python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+```
+
+For a packaged CLI, `sudo apt install -y pipx` then `pipx install .` avoids managing a venv by hand.
+
+**Docker multi-arch (optional, one-time).** Cross-building `linux/amd64` + `linux/arm64` needs QEMU and a `docker-container` builder:
 
 ```bash
 docker run --privileged --rm tonistiigi/binfmt --install all
 docker buildx create --name multiarch --driver docker-container --bootstrap --use
 ```
 
-The first line registers QEMU so the host can emulate the non-native architecture (`--install all` is host-agnostic); the second creates and activates the builder reused by later `docker buildx build`. On Apple Silicon + OrbStack, cross-arch emulation is built in, so only the `buildx create` line is needed.
+On Apple Silicon with OrbStack, emulation is built in, so only the second line is needed.
 
-### Not required
-
-- **node / npm** — not used; serve static content with `python3 -m http.server`.
-- **.NET SDK** — no .NET projects.
+**Not used.** `node`/`npm` (serve static content with `python3 -m http.server`) and the .NET SDK.
 
 ## License
 
