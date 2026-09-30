@@ -6,6 +6,16 @@ Guidance for Claude Code in this repository.
 
 A **Claude Code template** — a starting point for new projects, not an application. It holds only configuration and licensing files; application code gets added alongside them.
 
+## Code principles — IMPORTANT
+
+**All code MUST be SIMPLE, MINIMAL, EASY TO UNDERSTAND, and DRY.** These rules come before cleverness, speculative flexibility, and personal style.
+
+- **Simple:** use the most straightforward approach that works. No clever tricks, premature abstraction, or premature optimization.
+- **Minimal:** write only what the task needs. No speculative features, unused options, or "just in case" code. Fewer lines, files, and dependencies win. Delete dead code.
+- **Easy to understand:** a newcomer should follow it on first read. Clear names, small functions, shallow nesting, obvious control flow.
+- **DRY:** one source of truth for each piece of logic, data, and config. Search for existing code to reuse before writing new code; never copy-paste logic. Extract it once instead.
+- **When in doubt, choose the simpler option.** Before finishing, re-read your diff and cut anything that isn't needed.
+
 ## Layout
 
 - `.claude/settings.json` — committed settings (`model: opus`, `effortLevel: xhigh`), permission allowlist, and a `SessionStart` hook that prints `PROGRESS.md` into context. Personal overrides go in the gitignored `.claude/settings.local.json`, never here.
