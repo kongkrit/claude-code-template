@@ -24,7 +24,7 @@ A starter repository preconfigured for [Claude Code](https://claude.com/claude-c
 `docker` is assumed installed. Base toolchain:
 
 ```bash
-sudo apt install -y git gh python3 python3-venv python3-pip python3-dev build-essential curl jq
+sudo apt install -y git gh python3 python3-venv python3-pip python3-dev build-essential curl jq wget
 ```
 
 `python3-dev` and `build-essential` are only needed for Python packages built from source.
