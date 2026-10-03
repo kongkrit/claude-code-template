@@ -18,7 +18,13 @@ A **Claude Code template** — a starting point for new projects, not an applica
 
 ## How to explain things
 
-These rules apply to explanations to the user, not to code, comments, or commit messages.
+These rules apply to explanations to the user and to code comments, not to commit messages.
+
+For code comments:
+- Explain why and the mechanism; don't restate what the code plainly does.
+- Define a term once, at its first use in the file.
+- Add a worked numeric example only for non-obvious math (scaling, units, bit layouts).
+- Keep comments as short as the point allows; "Simple", "Minimal", "Easy to understand", and "DRY" still applies.
 
 Audience: someone with a BS in EE who remembers the fundamentals (circuits, signals, calculus, basic probability and statistics) but not every formula or every field's jargon. Write for a sharp engineer outside the specialty.
 
