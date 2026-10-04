@@ -7,6 +7,7 @@ A starter repository preconfigured for [Claude Code](https://claude.com/claude-c
 | File | Purpose |
 |------|---------|
 | `.claude/settings.json` | Claude Code settings (`model: opus`, `effortLevel: xhigh`), a permission allowlist, and a `SessionStart` hook that prints `PROGRESS.md` into context. |
+| `.claude/CLAUDE.md` | Project instructions Claude Code loads every session: code principles, explanation style, conventions, environment. Edit to fit your project. |
 | `.claude/commands/wrapup.md` | `/wrapup` — writes a session handoff to `PROGRESS.md`, then commits. |
 | `PROGRESS.md` | Session handoff maintained by `/wrapup`. |
 | `.gitignore` | OS cruft, Python/Node build artifacts, editor files. |
@@ -17,7 +18,7 @@ A starter repository preconfigured for [Claude Code](https://claude.com/claude-c
 
 1. Click **Use this template** on GitHub, or clone the repo.
 2. Delete what you don't need and start building.
-3. Adjust `.claude/settings.json` to taste ([settings docs](https://docs.claude.com/en/docs/claude-code/settings)). Personal overrides go in `.claude/settings.local.json`, which is gitignored.
+3. Adjust `.claude/settings.json` to taste ([settings docs](https://code.claude.com/docs/en/settings)). Personal overrides go in `.claude/settings.local.json`, which is gitignored.
 
 ## Development setup (Debian 13)
 

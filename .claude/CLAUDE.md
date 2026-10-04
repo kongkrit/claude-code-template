@@ -24,7 +24,7 @@ For code comments:
 - Explain why and the mechanism; don't restate what the code plainly does.
 - Define a term once, at its first use in the file.
 - Add a worked numeric example only for non-obvious math (scaling, units, bit layouts).
-- Keep comments as short as the point allows; "Simple", "Minimal", "Easy to understand", and "DRY" still applies.
+- Keep comments as short as the point allows; "Simple", "Minimal", "Easy to understand", and "DRY" still apply.
 
 Audience: someone with a BS in EE who remembers the fundamentals (circuits, signals, calculus, basic probability and statistics) but not every formula or every field's jargon. Write for a sharp engineer outside the specialty.
 
@@ -57,7 +57,7 @@ Goal: as simple as possible, without saying anything false.
 
 ## Development environment
 
-- **Debian 13 (trixie)** with `docker` installed. Base tooling via `apt`: `git`, `gh`, `python3`, `python3-venv`, `python3-pip`, `python3-dev`, `build-essential`, `curl`, `jq`; plus `uv` from its standalone installer into `~/.local/bin` (commands in the [README](../README.md#development-setup-debian-13)).
+- **Debian 13 (trixie)** with `docker` installed. Base tooling via `apt`: `git`, `gh`, `python3`, `python3-venv`, `python3-pip`, `python3-dev`, `build-essential`, `curl`, `jq`, `wget`; plus `uv` from its standalone installer into `~/.local/bin` (commands in the [README](../README.md#development-setup-debian-13)).
 - **Install missing tools yourself:** `sudo apt install -y <package>` (`sudo apt update` first if not found). Use `apt` for system tools only. If the project will keep relying on a new tool, add it to the README's install command.
 - **Never `pip install` system-wide** (PEP 668). Use a per-project venv:
 
