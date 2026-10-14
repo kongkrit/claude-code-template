@@ -51,6 +51,7 @@ Goal: as simple as possible, without saying anything false.
 
 ## Conventions
 
+- **NEVER `git commit` or `git push` on your own.** Do either only when the user's current message asks for it. Exception: `/wrapup` always commits, never pushes.
 - LF line endings everywhere; never introduce CRLF.
 - New languages or toolchains extend `.gitignore` and `.gitattributes` — no parallel ignore files. Keep new entries consistent with existing ones.
 - Respect the [LICENSE](../LICENSE) when adding dependencies.
