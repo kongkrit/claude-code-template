@@ -59,12 +59,13 @@ Goal: as simple as possible, without saying anything false.
 
 ## Development environment
 
-- **Debian 13 (trixie)** with `docker` installed. Base tooling via `apt`: `git`, `gh`, `python3`, `python3-venv`, `python3-pip`, `python3-dev`, `build-essential`, `curl`, `jq`, `wget`; plus `uv` from its standalone installer into `~/.local/bin` (commands in the [README](../README.md#development-setup-debian-13)).
+- **Debian 13 (trixie)** with `docker` installed. Base tooling via `apt`: `git`, `gh`, `python3`, `python3-dev`, `build-essential`, `curl`, `jq`, `wget`; plus `uv` from its standalone installer into `~/.local/bin` (commands in the [README](../README.md#development-setup-debian-13)).
 - **Install missing tools yourself:** `sudo apt install -y <package>` (`sudo apt update` first if not found). Use `apt` for system tools only. If the project will keep relying on a new tool, add it to the README's install command.
-- **Never `pip install` system-wide** (PEP 668). Use a per-project venv:
+- **Python: use `uv` only.** Never run `pip`, `pip3`, `python3 -m pip`, `python3 -m venv`, or `pipx`; `uv pip …` is uv's own subcommand and is fine. uv handles both venvs and installs, and Debian 13 blocks system-wide `pip install` anyway (PEP 668). One venv per project:
 
   ```bash
-  uv venv && uv pip install -r requirements.txt    # or: uv sync
-  # or: python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+  uv sync                                          # pyproject.toml project; add packages with: uv add <pkg>
+  uv venv && uv pip install -r requirements.txt    # requirements.txt-only project
+  uv run <cmd>                                     # run a command in the project venv
   ```
 - `node`/`npm` and .NET are not used; serve static content with `python3 -m http.server`. Multi-arch Docker builds need a one-time QEMU + buildx setup (see README).

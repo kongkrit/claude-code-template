@@ -25,7 +25,7 @@ A starter repository preconfigured for [Claude Code](https://claude.com/claude-c
 `docker` is assumed installed. Base toolchain:
 
 ```bash
-sudo apt install -y git gh python3 python3-venv python3-pip python3-dev build-essential curl jq wget
+sudo apt install -y git gh python3 python3-dev build-essential curl jq wget
 ```
 
 `python3-dev` and `build-essential` are only needed for Python packages built from source.
@@ -46,15 +46,14 @@ sudo apt update && sudo apt install -y <package>
 
 Use `apt` for system tools; keep Python packages in the project venv. Add any lasting dependency to the command above.
 
-**Python.** Debian 13 blocks system-wide `pip install` (PEP 668). Use a venv per project, with `uv` or the standard library:
+**Python.** Use `uv` for every venv and package install, not `pip` or `python3 -m venv` (Debian 13 also blocks system-wide `pip install`, PEP 668). One venv per project:
 
 ```bash
-uv venv && uv pip install -r requirements.txt    # or: uv sync, if the project has a pyproject.toml
-# or
-python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+uv sync                                          # project with a pyproject.toml; add packages with: uv add <pkg>
+uv venv && uv pip install -r requirements.txt    # project with only a requirements.txt
 ```
 
-For a packaged CLI, `sudo apt install -y pipx` then `pipx install .` avoids managing a venv by hand.
+For a packaged CLI, `uv tool install .` avoids managing a venv by hand.
 
 **Docker multi-arch (optional, one-time).** Cross-building `linux/amd64` + `linux/arm64` needs QEMU and a `docker-container` builder:
 
