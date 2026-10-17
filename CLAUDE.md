@@ -6,9 +6,9 @@ Guidance for Claude Code in this repository.
 
 A **Claude Code template** — a starting point for new projects, not an application. It holds only configuration and licensing files; application code gets added alongside them.
 
-## Code principles — IMPORTANT
+## Code principles
 
-**All code MUST be SIMPLE, MINIMAL, EASY TO UNDERSTAND, and DRY.** These rules come before cleverness, speculative flexibility, and personal style.
+Code is simple, minimal, easy to understand, and DRY. These come before cleverness, speculative flexibility, and personal style.
 
 - **Simple:** use the most straightforward approach that works. No clever tricks, premature abstraction, or premature optimization.
 - **Minimal:** write only what the task needs. No speculative features, unused options, or "just in case" code. Fewer lines, files, and dependencies win. Delete dead code.
@@ -52,7 +52,7 @@ Goal: as simple as possible, without saying anything false.
 ## Conventions
 
 - **NEVER `git commit` or `git push` on your own.** Do either only when the user's current message asks for it. Exception: `/wrapup` always commits, never pushes.
-- LF line endings everywhere; never introduce CRLF.
+- Line endings follow `.gitattributes`: LF by default, CRLF only for the Windows script types it lists.
 - New languages or toolchains extend `.gitignore` and `.gitattributes` — no parallel ignore files. Keep new entries consistent with existing ones.
 - Respect the [LICENSE](LICENSE) when adding dependencies.
 - As the template becomes a real project, add build, test, and run commands here.
