@@ -4,7 +4,7 @@ Guidance for Claude Code in this repository.
 
 ## What this is
 
-A **Claude Code template** — a starting point for new projects, not an application. It holds only configuration and licensing files; application code gets added alongside them.
+A **Claude Code template** — a starting point for new projects, not an application. It holds only configuration and documentation files; application code gets added alongside them.
 
 ## Code principles
 
@@ -47,14 +47,14 @@ Goal: as simple as possible, without saying anything false.
 - `.claude/rules/markdown.md` — how to write README.md and docs/: which `##` sections fold, and how. Claude Code loads it by itself when working on those files.
 - `PROGRESS.md` — session handoff maintained by `/wrapup`.
 - `.gitignore`, `.gitattributes` — ignore rules; LF line endings and binary file types.
-- `README.md`, `LICENSE` — human-facing overview and license.
+- `README.md` — human-facing overview.
 
 ## Conventions
 
 - **NEVER `git commit` or `git push` on your own.** Do either only when the user's current message asks for it. Exception: `/wrapup` always commits, never pushes.
 - Line endings follow `.gitattributes`: LF by default, CRLF only for the Windows script types it lists.
 - New languages or toolchains extend `.gitignore` and `.gitattributes` — no parallel ignore files. Keep new entries consistent with existing ones.
-- Respect the [LICENSE](LICENSE) when adding dependencies.
+- **Read first, edit once, check once.** Before changing anything, list every file the change touches and read them in one pass. Then make all the edits, then run whatever verifies them once. Don't loop read, edit, rerun per file. If a check fails, fix it and rerun that check.
 - As the template becomes a real project, add build, test, and run commands here.
 
 ## Development environment

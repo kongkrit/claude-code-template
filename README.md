@@ -12,7 +12,6 @@ A starter repository preconfigured for [Claude Code](https://claude.com/claude-c
 | `PROGRESS.md` | Session handoff maintained by `/wrapup`. |
 | `.gitignore` | OS cruft, Python/Node build artifacts, editor files. |
 | `.gitattributes` | LF line endings; binary file types. |
-| `LICENSE` | Project license. |
 
 ## Usage
 
@@ -65,7 +64,3 @@ docker buildx create --name multiarch --driver docker-container --bootstrap --us
 On Apple Silicon with OrbStack, emulation is built in, so only the second line is needed.
 
 **Not used.** `node`/`npm` (serve static content with `python3 -m http.server`) and the .NET SDK.
-
-## License
-
-See [LICENSE](LICENSE).
