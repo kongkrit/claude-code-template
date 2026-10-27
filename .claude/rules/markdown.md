@@ -41,5 +41,3 @@ If the build fails with ...
 - **Blank lines:** one after `</summary>` (after the `<br>` when there is one) and one before `</details>`. GitHub reads the lines straight after an HTML tag as HTML, so without the first blank line a `###` shows up as literal text.
 - **`</details>` closes the section** after its last line, before the next `##`.
 - **Never fold the `#` title or the introduction under it.**
-
-To check the result with GitHub's own renderer: `gh api markdown -f mode=gfm -F text=@README.md`. Each folded `<h2>` should be followed by `<details>` and `<summary>`, and the subsections should render as headings, not as text starting with `###`.
