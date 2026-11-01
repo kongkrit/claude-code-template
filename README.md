@@ -7,9 +7,9 @@ A starter repository preconfigured for [Claude Code](https://claude.com/claude-c
 | File | Purpose |
 |------|---------|
 | `.claude/settings.json` | Claude Code settings (`model: opus`, `effortLevel: xhigh`), a permission allowlist, and a `SessionStart` hook that prints `PROGRESS.md` into context. |
-| `.claude/commands/wrapup.md` | `/wrapup` — writes a session handoff to `PROGRESS.md`, then commits. |
+| `.claude/commands/wrapup.md` | `/wrapup` — rewrites `PROGRESS.md` as a handoff for the work since the previous one, then commits. |
 | `CLAUDE.md` | Project instructions Claude Code loads every session: code principles, explanation style, conventions, environment. Edit to fit your project. |
-| `PROGRESS.md` | Session handoff maintained by `/wrapup`. |
+| `PROGRESS.md` | Latest session handoff, maintained by `/wrapup`; earlier ones: `git log -p -- PROGRESS.md`. |
 | `.gitignore` | OS cruft, Python/Node build artifacts, editor files. |
 | `.gitattributes` | LF line endings; binary file types. |
 

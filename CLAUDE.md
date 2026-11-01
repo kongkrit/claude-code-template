@@ -43,9 +43,9 @@ Goal: as simple as possible, without saying anything false.
 ## Layout
 
 - `.claude/settings.json` — committed settings (`model: opus`, `effortLevel: xhigh`), permission allowlist, and a `SessionStart` hook that prints `PROGRESS.md` into context. Personal overrides go in the gitignored `.claude/settings.local.json`, never here.
-- `.claude/commands/wrapup.md` — `/wrapup`: writes a session handoff to `PROGRESS.md`, then commits.
+- `.claude/commands/wrapup.md` — `/wrapup`: rewrites `PROGRESS.md` as a handoff for the work since the previous one (base: the last commit that touched it), then commits.
 - `.claude/rules/markdown.md` — how to write README.md and docs/: which `##` sections fold, and how. Claude Code loads it by itself when working on those files.
-- `PROGRESS.md` — session handoff maintained by `/wrapup`.
+- `PROGRESS.md` — latest session handoff only, maintained by `/wrapup`; earlier ones: `git log -p -- PROGRESS.md`.
 - `.gitignore`, `.gitattributes` — ignore rules; LF line endings and binary file types.
 - `README.md` — human-facing overview.
 
