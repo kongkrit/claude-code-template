@@ -42,10 +42,10 @@ Goal: as simple as possible, without saying anything false.
 
 ## Layout
 
-- `.claude/settings.json` — committed settings (`model: opus`, `effortLevel: xhigh`), permission allowlist, and a `SessionStart` hook that prints `PROGRESS.md` into context. Personal overrides go in the gitignored `.claude/settings.local.json`, never here.
-- `.claude/commands/wrapup.md` — `/wrapup`: rewrites `PROGRESS.md` as a handoff for the work since the previous one (base: the last commit that touched it), then commits.
+- `.claude/settings.json` — committed settings (`model: opus`, `effortLevel: xhigh`), permission allowlist, and a `SessionStart` hook that prints `.claude/PROGRESS.md` into context. Personal overrides go in the gitignored `.claude/settings.local.json`, never here.
+- `.claude/skills/wrapup/SKILL.md` — `/wrapup`: rewrites `.claude/PROGRESS.md` as a handoff for the work since the previous one (base: the last commit that touched it), then commits.
 - `.claude/rules/markdown.md` — how to write README.md and docs/: which `##` sections fold, and how. Claude Code loads it by itself when working on those files.
-- `PROGRESS.md` — latest session handoff only, maintained by `/wrapup`; earlier ones: `git log -p -- PROGRESS.md`.
+- `.claude/PROGRESS.md` — latest session handoff only, maintained by `/wrapup`; earlier ones: `git log --follow -p -- .claude/PROGRESS.md`.
 - `.gitignore`, `.gitattributes` — ignore rules; LF line endings and binary file types.
 - `README.md` — human-facing overview.
 
@@ -59,7 +59,7 @@ Goal: as simple as possible, without saying anything false.
 
 ## Development environment
 
-- **Debian 13 (trixie)** with `docker` installed. Base tooling via `apt`: `git`, `gh`, `python3`, `python3-dev`, `build-essential`, `curl`, `jq`, `wget`; plus `uv` from its standalone installer into `~/.local/bin` (commands in the [README](README.md#development-setup-debian-13)).
+- **Debian 13 (trixie)** with `docker` installed. Base tooling via `apt`: `git`, `gh`, `python3`, `python3-dev`, `build-essential`, `curl`, `jq`, `wget`; plus `uv` from its standalone installer into `~/.local/bin` (commands in the [README](../README.md#development-setup-debian-13)).
 - **Install missing tools yourself:** `sudo apt install -y <package>` (`sudo apt update` first if not found). Use `apt` for system tools only. If the project will keep relying on a new tool, add it to the README's install command.
 - **Python: use `uv` only.** Never run `pip`, `pip3`, `python3 -m pip`, `python3 -m venv`, or `pipx`; `uv pip …` is uv's own subcommand and is fine. uv handles both venvs and installs, and Debian 13 blocks system-wide `pip install` anyway (PEP 668). One venv per project:
 
