@@ -1,6 +1,7 @@
 ---
 name: wrapup
 description: Write session handoff to .claude/PROGRESS.md and commit
+disable-model-invocation: true
 allowed-tools: Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git diff:*), Bash(git status:*), Bash(git show:*)
 ---
 Rewrite .claude/PROGRESS.md as a handoff that holds only what changed since the previous handoff, so its git history shows each change once. The one exception: still-open Next steps and Open questions carry over until done or answered.
